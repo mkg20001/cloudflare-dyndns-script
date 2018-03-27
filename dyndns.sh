@@ -40,7 +40,7 @@ zoneid=$(getjson ".result[0].id" -X GET "$API/zones?name=$ZONE$SEARCH" "${CRED[@
 [ -z "$zoneid" ] && echo "Zone not found or not authorized!" && exit 2
 echo "Zone detected as $zoneid"
 domains=$(getjson ".result[] | [.id, .type]" -X GET "$API/zones/$zoneid/dns_records?name=$DOMAIN$SEARCH" "${CRED[@]}")
-[ -z "$zoneid" ] && echo "Domain not found or not authorized!" && exit 2
+[ -z "$domains" ] && echo "Domain not found or not authorized!" && exit 2
 
 IP4=$(dig +short myip.opendns.com A    @208.67.222.222)
 IP6=$(dig +short myip.opendns.com AAAA @2620:0:ccc::2)
